@@ -57,10 +57,10 @@ class Generator(chainer.Chain):
            batchsize indicate len(z)
 
         """
-        return np.random.uniform(-1, 1, (batchsize, self.n_hidden, 1, 1))\
+        return np.random.uniform(-1, 1, (batchsize, self.n_hidden))\
                         .astype(np.float32)
 
-    def one_hot(self, labels, num_labels):
+    def to_one_hot(self, labels, num_labels):
         """
         make one-hot vector
 
@@ -89,7 +89,7 @@ class Generator(chainer.Chain):
         num_labels: int
            number of labels
         """
-        one_hot = self.one_hot(labels, num_labels)  # make one_hot from labels
+        one_hot = self.to_one_hot(labels, num_labels)  # make one_hot from labels
         h = F.concat((z, one_hot), axis=1)  # merge inputs and labels
         h = F.relu(self.bn0(self.l0(h)))
         h = F.relu(self.bn1(self.l1(h)))
