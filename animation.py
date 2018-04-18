@@ -13,7 +13,7 @@ for epoch in range(1, 101):
     img = cv2.imread(str(path / "image_{}epoch.png".format(epoch)), 0)
     frame = plt.imshow(img, cmap=plt.cm.gray)
     ims.append([frame])
-ani = animation.ArtistAnimation(fig, ims, interval=300)
+ani = animation.ArtistAnimation(fig, ims, interval=200)
 # ani.save('anim.mp4', writer="ffmpeg")
 plt.axis("off")
 ani.save('anim.gif', writer="imagemagick")

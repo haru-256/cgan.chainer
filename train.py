@@ -9,12 +9,12 @@ from visualize import out_generated_image
 
 
 def main():
-    gpu = -1
+    gpu = 0
     batch_size = 128
     n_hidden = 100
-    epoch = 100
+    epoch = 3000
     seed = 0
-    out = "result"
+    out = "result2"
 
     print('GPU: {}'.format(gpu))
     print('# Minibatch-size: {}'.format(batch_size))
@@ -57,7 +57,7 @@ def main():
         device=gpu)
     trainer = training.Trainer(updater, (epoch, 'epoch'), out=out)
 
-    snapshot_interval = (1, 'epoch')
+    snapshot_interval = (30, 'epoch')
     display_interval = (1, 'iteration')
     trainer.extend(
         extensions.snapshot(filename='snapshot_iter_{.updater.iteration}.npz'),

@@ -29,7 +29,7 @@ def out_generated_image(gen, dis, rows, cols, seed, dst):
         n_images = rows * cols
         xp = gen.xp
         z = Variable(xp.asarray(gen.make_hidden(n_images)))
-        labels = Variable(xp.repeat([i for i in range(10)], 10))
+        labels = Variable(xp.repeat(xp.array([i for i in range(10)]), 10))
         with chainer.using_config('train', False):
             x = gen(z, labels, 10)
         x = chainer.backends.cuda.to_cpu(x.data)
