@@ -4,7 +4,7 @@ import chainer.links as L
 
 
 class Discriminator(chainer.Chain):
-    def __init__(self, bottom_width=3, ch=11, wscale=0.02):
+    def __init__(self, bottom_width=28, ch=1, wscale=0.02):
         super(Discriminator, self).__init__()
         with self.init_scope():
             # initializers

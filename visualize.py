@@ -25,15 +25,16 @@ def combine_images(generated_images):
 def out_generated_image(gen, dis, rows, cols, seed, dst):
     @chainer.training.make_extension()
     def make_image(trainer):
-        np.random.seed(seed)
         n_images = rows * cols
-        xp = gen.xp
+
+        xp = gen.xp  # get module 
+        xp.random.seed(seed)  # fix seed
         z = Variable(xp.asarray(gen.make_hidden(n_images)))
         labels = Variable(xp.repeat(xp.array([i for i in range(10)]), 10))
         with chainer.using_config('train', False):
             x = gen(z, labels, 10)
         x = chainer.backends.cuda.to_cpu(x.data)
-        np.random.seed()
+        xp.random.seed()
 
         x = x * 127.5 + 127.5
         x = x.transpose(0, 2, 3, 1)  # NCHW->NHWCに変形
